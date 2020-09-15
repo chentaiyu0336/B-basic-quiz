@@ -6,6 +6,7 @@ import com.example.demo.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -25,13 +26,13 @@ public class userController {
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public long createNewUser(@RequestBody User user) {
+    public long createNewUser(@RequestBody @Valid User user) {
         return userService.adduser(user);
     }
 
     @PostMapping("/{id}/educations")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addEducationInfo(@PathVariable long id, @RequestBody Education education) {
+    public void addEducationInfo(@PathVariable long id, @RequestBody @Valid Education education) {
         userService.addEducationList(id, education);
     }
 
