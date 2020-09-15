@@ -35,4 +35,9 @@ public class userController {
         userService.addEducationList(id, education);
     }
 
+    @GetMapping("/{id}/educations")
+    public List<Education> getEducationList(@PathVariable long id) {
+        return userService.getEducationList(id);
+    }
+
 }

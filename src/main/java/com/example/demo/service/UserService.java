@@ -26,4 +26,8 @@ public class UserService {
     public void addEducationList(long id, Education education) {
         userRepository.addEducation(id, education);
     }
+
+    public List<Education> getEducationList(long id) {
+        return userRepository.getEducationList(id);
+    }
 }

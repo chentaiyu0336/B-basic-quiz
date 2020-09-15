@@ -55,4 +55,9 @@ public class UserRepository {
             }
         });
     }
+
+    public List<Education> getEducationList(long id) {
+        isUserExit(id);
+        return userList.stream().filter(user -> user.getId() == id).findFirst().get().getEducationList();
+    }
 }
