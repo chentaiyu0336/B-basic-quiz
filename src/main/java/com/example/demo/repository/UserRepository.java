@@ -34,4 +34,11 @@ public class UserRepository {
         isUserExit(id);
         return userList.stream().filter(user->user.getId()==id).findFirst().get();
     }
+
+    public long addUser(User user) {
+        endId++;
+        user.setId(endId);
+        userList.add(user);
+        return endId;
+    }
 }
