@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import com.example.demo.domain.Education;
 import com.example.demo.domain.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
@@ -15,24 +16,25 @@ public class UserRepository {
     {
         userList.add(new User(1, "KAMIL", 24,
                 "https://inews.gtimg.com/newsapp_match/0/3581582328/0",
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, non, dolorem, cumque distinctio magni quam expedita velit laborum sunt amet facere tempora ut fuga aliquam ad asperiores voluptatem dolorum! Quasi."));
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, non, dolorem, cumque distinctio magni quam expedita velit laborum sunt amet facere tempora ut fuga aliquam ad asperiores voluptatem dolorum! Quasi.",
+                null));
     }
 
     static long endId = 1;
 
     public void isUserExit(long id) {
-        boolean flg=false;
-        for(User user : userList) {
-            if(user.getId()==id)
-                flg=true;
+        boolean flg = false;
+        for (User user : userList) {
+            if (user.getId() == id)
+                flg = true;
         }
-        if(!flg)
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"user not found");
+        if (!flg)
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "user not found");
     }
 
     public User getUserById(long id) {
         isUserExit(id);
-        return userList.stream().filter(user->user.getId()==id).findFirst().get();
+        return userList.stream().filter(user -> user.getId() == id).findFirst().get();
     }
 
     public long addUser(User user) {
@@ -40,5 +42,17 @@ public class UserRepository {
         user.setId(endId);
         userList.add(user);
         return endId;
+    }
+
+    public void addEducation(long id, Education education) {
+        education.setUserId(id);
+        isUserExit(id);
+        userList.forEach(user -> {
+            if (user.getId() == id) {
+                if (user.getEducationList() == null)
+                    user.setEducationList(new ArrayList<>());
+                user.getEducationList().add(education);
+            }
+        });
     }
 }
