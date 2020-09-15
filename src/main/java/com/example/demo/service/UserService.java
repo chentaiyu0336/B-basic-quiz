@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.domain.User;
 import com.example.demo.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -9,5 +10,9 @@ public class UserService {
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    public User getUserById(long id) {
+        return userRepository.getUserById(id);
     }
 }
