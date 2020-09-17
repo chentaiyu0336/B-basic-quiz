@@ -19,6 +19,7 @@ public class UserService {
         return userRepository.getUserById(id);
     }
 
+    // GTB: - 大小写问题 adduser
     public long adduser(User user) {
         return userRepository.addUser(user);
     }
