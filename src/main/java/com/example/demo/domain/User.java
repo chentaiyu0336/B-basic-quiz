@@ -24,6 +24,7 @@ public class User {
     @Size(max = 1024, min = 0)
     private String description;
 
+    // GTB: - 需求说明里没有要求包含 educationList
     @JsonInclude(JsonInclude.Include.NON_NULL)
     List<Education> educationList;
 }
