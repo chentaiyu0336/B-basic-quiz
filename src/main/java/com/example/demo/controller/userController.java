@@ -20,25 +20,25 @@ public class userController {
     }
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable long id) {
+    public User getUserById(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public long createNewUser(@RequestBody @Valid User user) {
-        return userService.adduser(user);
+    public Long createNewUser(@RequestBody @Valid User user) {
+        return userService.addUser(user);
     }
 
-    @PostMapping("/{id}/educations")
+    @PostMapping("/{userId}/educations")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addEducationInfo(@PathVariable long id, @RequestBody @Valid Education education) {
-        userService.addEducationList(id, education);
+    public void addEducationInfo(@PathVariable Long userId, @RequestBody @Valid Education education) {
+        userService.addEducationList(userId, education);
     }
 
-    @GetMapping("/{id}/educations")
-    public List<Education> getEducationList(@PathVariable long id) {
-        return userService.getEducationList(id);
+    @GetMapping("/{userId}/educations")
+    public List<Education> getEducationList(@PathVariable Long userId) {
+        return userService.getEducationList(userId);
     }
 
 }
