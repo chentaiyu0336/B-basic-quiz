@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.domain.Education;
 import com.example.demo.domain.User;
+import com.example.demo.exception.UserNotExistException;
 import com.example.demo.repository.EducationRepository;
 import com.example.demo.repository.UserRepository;
 import org.springframework.http.HttpStatus;
@@ -22,9 +23,9 @@ public class UserService {
     }
 
     public User getUserById(Long id) {
-        Optional<User> user= userRepository.findById(id);
-        if(!user.isPresent())
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "user not found");
+        Optional<User> user = userRepository.findById(id);
+        if (!user.isPresent())
+            throw new UserNotExistException("user not found");
         return user.get();
     }
 
@@ -34,17 +35,17 @@ public class UserService {
     }
 
     public void addEducationList(Long userId, Education education) {
-        Optional<User> user=userRepository.findById(userId);
-        if(!user.isPresent())
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "user not found");
+        Optional<User> user = userRepository.findById(userId);
+        if (!user.isPresent())
+            throw new UserNotExistException("user not found");
         education.setUser(user.get());
         educationRepository.save(education);
     }
 
     public List<Education> getEducationList(Long userId) {
-        Optional<User> user=userRepository.findById(userId);
-        if(!user.isPresent())
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "user not found");
+        Optional<User> user = userRepository.findById(userId);
+        if (!user.isPresent())
+            throw new UserNotExistException("user not found");
         return educationRepository.findAllByUser(user.get());
     }
 }
